@@ -16,4 +16,7 @@ class MainViewModel @Inject constructor(private val repository: PunkRepository):
     suspend fun getDataFromNetwork(){
         _beers.value = repository.getDataFromNetwork()
     }
+    suspend fun getBeersForFood(foodName: String){
+        _beers.value = repository.getBeersForFood(foodName)
+    }
 }
