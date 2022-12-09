@@ -13,9 +13,6 @@ class MainViewModel @Inject constructor(private val repository: PunkRepository):
     private val _beers: MutableLiveData<List<BeerItem>> = MutableLiveData()
     val beers: LiveData<List<BeerItem>>
         get() = _beers
-    suspend fun getDataFromNetwork(){
-        _beers.value = repository.getDataFromNetwork()
-    }
     suspend fun getBeersForFood(foodName: String){
         _beers.value = repository.getBeersForFood(foodName)
     }
