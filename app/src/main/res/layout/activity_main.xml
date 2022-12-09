@@ -3,31 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#F5F5F5"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleCentered="true"
-        android:background="#FFFFFF"
+        android:background="#4CAF50"
         app:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:titleCentered="true" />
+    <TextView
+        android:id="@+id/search_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/custom_toolbar"
+        android:visibility="gone"
+        android:padding="8dp"
+        style="@style/search_result_text"
+        app:layout_constraintBottom_toTopOf="@id/beer_recycler_view"
+        tools:text="Search results for : "
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/beer_recycler_view"
         android:layout_width="match_parent"
         android:paddingHorizontal="16dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/custom_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/search_result_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
-
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/welcome_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Press the 'Search' button to get suggestions!"
+        />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/search_button"
         android:layout_width="wrap_content"
@@ -50,5 +83,23 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85"
         />
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/modal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingHorizontal="16dp"
+        android:visibility="gone">
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:iconifiedByDefault="false"
+            android:queryHint="Start typing.."
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
