@@ -1,6 +1,7 @@
 package com.cowday.foodmatcher.adapter
 
 import android.media.Image
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
     class BeerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val beerImage = itemView.findViewById<ImageView>(R.id.beer_image)
         val beerName = itemView.findViewById<TextView>(R.id.beer_name)
+        val beerTagLine = itemView.findViewWithTag<TextView>(R.id.beer_tagline)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerViewHolder {
@@ -29,7 +31,7 @@ class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
 
     override fun onBindViewHolder(holder: BeerViewHolder, position: Int) {
         val currentItem = beerList[position]
-        Picasso.get().load(currentItem.imageUrl).fit().into(holder.beerImage)
+        Picasso.get().load(currentItem.imageUrl).placeholder(R.drawable.sample_image).into(holder.beerImage)
         holder.beerName.text = currentItem.name
     }
 
