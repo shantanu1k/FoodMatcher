@@ -11,9 +11,6 @@ interface PunkApi {
         const val BASE_URL = "https://api.punkapi.com/v2/"
     }
 
-    @GET("beers?page=1&per_page=10")
-    suspend fun getBeers(): Response<List<BeerItem>>
-
     @GET("beers")
     suspend fun getBeersForFood(@Query("food") foodName: String): Response<List<BeerItem>>
 }
