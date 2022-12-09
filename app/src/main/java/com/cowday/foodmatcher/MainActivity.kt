@@ -76,15 +76,15 @@ class MainActivity : AppCompatActivity() {
     }
     @SuppressLint("SetTextI18n")
     fun getBeersForFood(foodName: String){
+        lifecycleScope.launch {
+            viewModel.getBeersForFood(normalizeText(foodName))
+        }
         binding.apply {
             welcomeText.visibility = View.GONE
             progressBar.visibility = View.VISIBLE
             searchResultText.visibility = View.VISIBLE
             searchResultText.clearComposingText()
             searchResultText.text = "Search results for $foodName"
-        }
-        lifecycleScope.launch {
-            viewModel.getBeersForFood(normalizeText(foodName))
         }
     }
     private fun normalizeText(foodName: String): String{
