@@ -21,7 +21,7 @@ class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
     class BeerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val beerImage = itemView.findViewById<ImageView>(R.id.beer_image)
         val beerName = itemView.findViewById<TextView>(R.id.beer_name)
-        val beerTagLine = itemView.findViewWithTag<TextView>(R.id.beer_tagline)
+        val beerTagLine = itemView.findViewById<TextView>(R.id.beer_tagline)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerViewHolder {
@@ -32,7 +32,10 @@ class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
     override fun onBindViewHolder(holder: BeerViewHolder, position: Int) {
         val currentItem = beerList[position]
         Picasso.get().load(currentItem.imageUrl).placeholder(R.drawable.sample_image).into(holder.beerImage)
-        holder.beerName.text = currentItem.name
+        holder.apply {
+            beerName.text = currentItem.name
+            beerTagLine.text = currentItem.tagline
+        }
     }
 
     override fun getItemCount() = beerList.size
