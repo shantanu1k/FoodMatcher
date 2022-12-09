@@ -8,6 +8,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.Retrofit
 import java.io.IOException
+import java.io.StringReader
 import javax.inject.Inject
 
 class PunkRepository @Inject constructor(private val punkApi: PunkApi) {
@@ -15,6 +16,21 @@ class PunkRepository @Inject constructor(private val punkApi: PunkApi) {
         val response: Response<List<BeerItem>> = try{
             punkApi.getBeers()
         } catch (e: HttpException){
+            Log.d("Exception", "HTTP")
+            return emptyList()
+        } catch (e: IOException){
+            Log.d("Exception", "IO")
+            return emptyList()
+        }
+        if(response.isSuccessful && response.body() != null){
+            return response.body()!!
+        }
+        return emptyList()
+    }
+    suspend fun getBeersForFood(foodName: String): List<BeerItem> {
+        val response: Response<List<BeerItem>> = try{
+            punkApi.getBeersForFood(foodName)
+        }  catch (e: HttpException){
             Log.d("Exception", "HTTP")
             return emptyList()
         } catch (e: IOException){
