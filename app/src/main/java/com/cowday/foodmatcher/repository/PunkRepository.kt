@@ -12,21 +12,6 @@ import java.io.StringReader
 import javax.inject.Inject
 
 class PunkRepository @Inject constructor(private val punkApi: PunkApi) {
-    suspend fun getDataFromNetwork(): List<BeerItem>{
-        val response: Response<List<BeerItem>> = try{
-            punkApi.getBeers()
-        } catch (e: HttpException){
-            Log.d("Exception", "HTTP")
-            return emptyList()
-        } catch (e: IOException){
-            Log.d("Exception", "IO")
-            return emptyList()
-        }
-        if(response.isSuccessful && response.body() != null){
-            return response.body()!!
-        }
-        return emptyList()
-    }
     suspend fun getBeersForFood(foodName: String): List<BeerItem> {
         val response: Response<List<BeerItem>> = try{
             punkApi.getBeersForFood(foodName)
