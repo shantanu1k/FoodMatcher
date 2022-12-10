@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
     fun getBeersForFood(foodName: String){
         lifecycleScope.launch {
             viewModel.getBeersForFood(normalizeText(foodName))
+            viewModel.getBeersForFoodFromDatabase(normalizeText(foodName))
         }
         binding.apply {
             welcomeText.visibility = View.GONE
@@ -85,6 +86,11 @@ class MainActivity : AppCompatActivity() {
             searchResultText.visibility = View.VISIBLE
             searchResultText.clearComposingText()
             searchResultText.text = "Search results for $foodName"
+            viewModel.apply {
+                searchResultTextVisibility = true
+                searchResultText = foodName
+                welcomeTextVisibility = false
+            }
         }
     }
     private fun normalizeText(foodName: String): String{
@@ -97,5 +103,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return normalizedName
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(viewModel.searchResultTextVisibility){
+            binding.apply {
+                searchResultText.visibility = View.VISIBLE
+                searchResultText.clearComposingText()
+                searchResultText.text = "Search results for ${viewModel.searchResultText}"
+                welcomeText.visibility = View.GONE
+            }
+        }
     }
 }
