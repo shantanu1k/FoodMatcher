@@ -1,20 +1,21 @@
 package com.cowday.foodmatcher.adapter
 
-import android.media.Image
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.cowday.foodmatcher.R
-import com.cowday.foodmatcher.data.BeerItem
+import com.cowday.foodmatcher.data.SimpleBeerItem
+import com.cowday.foodmatcher.ui.DetailActivity
 import com.squareup.picasso.Picasso
 
 class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
-    private var beerList = listOf<BeerItem>()
-    fun updateBeerList(newBeerList: List<BeerItem>){
+    private var beerList = listOf<SimpleBeerItem>()
+    fun updateBeerList(newBeerList: List<SimpleBeerItem>){
         beerList = newBeerList
         notifyDataSetChanged()
     }
@@ -22,6 +23,7 @@ class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
         val beerImage = itemView.findViewById<ImageView>(R.id.beer_image)
         val beerName = itemView.findViewById<TextView>(R.id.beer_name)
         val beerTagLine = itemView.findViewById<TextView>(R.id.beer_tagline)
+        val beerCard = itemView.findViewById<CardView>(R.id.beer_card)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerViewHolder {
@@ -35,6 +37,17 @@ class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
         holder.apply {
             beerName.text = currentItem.name
             beerTagLine.text = currentItem.tagline
+            beerCard.setOnClickListener {
+                val i = Intent(it.context, DetailActivity::class.java)
+                i.apply {
+                    putExtra("beer_name",currentItem.name)
+                    putExtra("beer_image_url",currentItem.imageUrl)
+                    putExtra("beer_tagline",currentItem.tagline)
+                    putExtra("beer_description",currentItem.description)
+                    putExtra("beer_ph",currentItem.ph)
+                }
+                it.context.startActivity(i)
+            }
         }
     }
 
