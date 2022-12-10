@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="beer_tagline">Post Modern Classic. Spiky. Tropical. Hoppy.</string>
+    <string name="app_name">Food Matcher</string>
+    <string name="sample_beer_tagline">Post Modern Classic. Spiky. Tropical. Hoppy.</string>
+    <string name="sample_beer_name">Russian doll</string>
+    <string name="sample_beer_description">Our flagship beer that kick started the craft beer revolution. This is James and Martin\'s original take on an American IPA, subverted with punchy New Zealand hops. Layered with new world hops to create an all-out riot of grapefruit, pineapple and lychee before a spiky, mouth-puckering bitter finish.</string>
+    <string name="sample_beer_ph">4.4</string>
+    <string name="sample_beer_food_pairing">Spicy carne asada with a pico de gallo sauce, Shredded chicken tacos with a mango chilli lime salsa, Cheesecake with a passion fruit swirl sauce</string>
 </resources>
