@@ -1,30 +1,42 @@
 package com.cowday.foodmatcher.repository
 
 import android.util.Log
-import com.cowday.foodmatcher.data.Beer
+import android.widget.Toast
+import androidx.lifecycle.LiveData
 import com.cowday.foodmatcher.data.BeerItem
+import com.cowday.foodmatcher.data.SimpleBeerItem
+import com.cowday.foodmatcher.database.BeerDatabase
 import com.cowday.foodmatcher.network.PunkApi
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import retrofit2.HttpException
 import retrofit2.Response
-import retrofit2.Retrofit
 import java.io.IOException
-import java.io.StringReader
 import javax.inject.Inject
 
-class PunkRepository @Inject constructor(private val punkApi: PunkApi) {
-    suspend fun getBeersForFood(foodName: String): List<BeerItem> {
+@ActivityRetainedScoped
+class PunkRepository @Inject constructor(private val punkApi: PunkApi, beerDatabase: BeerDatabase) {
+    private val beerDao = beerDatabase.beerDao()
+    suspend fun getBeersForFood(foodName: String){
         val response: Response<List<BeerItem>> = try{
             punkApi.getBeersForFood(foodName)
         }  catch (e: HttpException){
             Log.d("Exception", "HTTP")
-            return emptyList()
+            return
         } catch (e: IOException){
             Log.d("Exception", "IO")
-            return emptyList()
+            return
         }
         if(response.isSuccessful && response.body() != null){
-            return response.body()!!
+            cacheBeer(response.body()!!, foodName)
         }
-        return emptyList()
+    }
+    private suspend fun cacheBeer(beerList: List<BeerItem>, foodName: String){
+        for(beer in beerList){
+            val simpleBear = SimpleBeerItem(beer.id, beer.imageUrl, beer.name, beer.ph, beer.tagline, beer.description, foodName)
+            beerDao.addBeer(simpleBear)
+        }
+    }
+    suspend fun getBeersForFoodFromDatabase(foodName: String): List<SimpleBeerItem>{
+        return beerDao.getBeerForFood(foodName)
     }
 }
