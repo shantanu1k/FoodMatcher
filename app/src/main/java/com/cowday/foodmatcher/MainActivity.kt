@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +44,10 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
         viewModel.beers.observe(this) {
             binding.progressBar.isVisible = it.isEmpty()
             beerAdapter.updateBeerList(it)
+            if(it.isEmpty()){
+                Toast.makeText(this, getString(R.string.no_beer_found), Toast.LENGTH_SHORT).show()
+                binding.progressBar.isVisible = false
+            }
         }
         binding.searchButton.setOnClickListener {
             isSearchOpen = !isSearchOpen
@@ -109,6 +112,7 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
     }
     override fun onStart() {
         super.onStart()
+        //For configuration changes
         if(viewModel.searchResultTextVisibility){
             binding.apply {
                 searchResultText.visibility = View.VISIBLE
