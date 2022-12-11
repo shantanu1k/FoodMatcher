@@ -1,23 +1,30 @@
 package com.cowday.foodmatcher
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cowday.foodmatcher.adapter.BeerAdapter
+import com.cowday.foodmatcher.data.SimpleBeerItem
 import com.cowday.foodmatcher.databinding.ActivityMainBinding
 import com.cowday.foodmatcher.model.MainViewModel
+import com.cowday.foodmatcher.ui.DetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityMainBinding
     private lateinit var beerAdapter: BeerAdapter
@@ -30,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.customToolbar)
         binding.welcomeText.visibility = View.VISIBLE
         recyclerView = binding.beerRecyclerView
-        beerAdapter = BeerAdapter()
+        beerAdapter = BeerAdapter(this)
         recyclerView.apply {
             adapter = beerAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -42,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         binding.searchButton.setOnClickListener {
             isSearchOpen = !isSearchOpen
             if(isSearchOpen){
+                binding.beerRecyclerView.visibility = View.INVISIBLE
                 binding.apply {
                     modal.visibility = View.VISIBLE
                     searchButton.setImageResource(R.drawable.ic_round_close_24)
@@ -68,6 +76,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun exitSearchButton(){
+        binding.beerRecyclerView.visibility = View.VISIBLE
         binding.apply {
             modal.visibility = View.GONE
             searchButton.setImageResource(R.drawable.ic_round_search_24)
@@ -77,8 +86,13 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     fun getBeersForFood(foodName: String){
         lifecycleScope.launch {
-            viewModel.getBeersForFood(normalizeText(foodName))
-            viewModel.getBeersForFoodFromDatabase(normalizeText(foodName))
+            if(isNetworkAvailable()){
+                viewModel.getBeersForFood(viewModel.normalizeText(foodName))
+            }
+            else{
+                Toast.makeText(this@MainActivity, getString(R.string.device_offline_text), Toast.LENGTH_SHORT).show()
+            }
+            viewModel.getBeersForFoodFromDatabase(viewModel.normalizeText(foodName))
         }
         binding.apply {
             welcomeText.visibility = View.GONE
@@ -93,18 +107,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private fun normalizeText(foodName: String): String{
-        var normalizedName = ""
-        for(i in foodName){
-            normalizedName += if(i == ' '){
-                '_'
-            } else {
-                i
-            }
-        }
-        return normalizedName
-    }
-
     override fun onStart() {
         super.onStart()
         if(viewModel.searchResultTextVisibility){
@@ -116,4 +118,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val activeNetworkInfo = connectivityManager?.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
+
+    override fun cardOnClickListener(beerItem: SimpleBeerItem) {
+        val i = Intent(this, DetailActivity::class.java)
+        i.apply {
+            putExtra("beer_name",beerItem.name)
+            putExtra("beer_image_url",beerItem.imageUrl)
+            putExtra("beer_tagline",beerItem.tagline)
+            putExtra("beer_description",beerItem.description)
+            putExtra("beer_ph",beerItem.ph)
+        }
+        startActivity(i)
+    }
+
 }
