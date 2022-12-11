@@ -38,7 +38,7 @@ class BeerAdapter(val listener: OnClickListener): RecyclerView.Adapter<BeerAdapt
 
     override fun onBindViewHolder(holder: BeerViewHolder, position: Int) {
         val currentItem = beerList[position]
-        Picasso.get().load(currentItem.imageUrl).placeholder(R.drawable.sample_image).into(holder.beerImage)
+        Picasso.get().load(currentItem.imageUrl).placeholder(R.drawable.placeholder_bottle).into(holder.beerImage)
 
         holder.apply {
             beerName.text = currentItem.name
