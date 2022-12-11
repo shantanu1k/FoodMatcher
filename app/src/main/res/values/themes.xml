@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="fontFamily">@font/chirp_regular</item>
         <!-- Customize your theme here. -->
     </style>
     <style name="Theme.Launch" parent="Theme.MaterialComponents.DayNight.NoActionBar">
