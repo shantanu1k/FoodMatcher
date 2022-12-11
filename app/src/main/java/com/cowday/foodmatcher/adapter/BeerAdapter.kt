@@ -1,6 +1,5 @@
 package com.cowday.foodmatcher.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.cowday.foodmatcher.R
 import com.cowday.foodmatcher.data.SimpleBeerItem
-import com.cowday.foodmatcher.ui.DetailActivity
 import com.squareup.picasso.Picasso
 
-class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
+class BeerAdapter(val listener: OnClickListener): RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
     private var beerList = listOf<SimpleBeerItem>()
     fun updateBeerList(newBeerList: List<SimpleBeerItem>){
         beerList = newBeerList
@@ -25,7 +23,9 @@ class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
         val beerTagLine = itemView.findViewById<TextView>(R.id.beer_tagline)
         val beerCard = itemView.findViewById<CardView>(R.id.beer_card)
     }
-
+    interface OnClickListener{
+        fun cardOnClickListener(beerItem: SimpleBeerItem)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BeerViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_beer, parent, false)
         return BeerViewHolder(itemView)
@@ -38,15 +38,7 @@ class BeerAdapter: RecyclerView.Adapter<BeerAdapter.BeerViewHolder>() {
             beerName.text = currentItem.name
             beerTagLine.text = currentItem.tagline
             beerCard.setOnClickListener {
-                val i = Intent(it.context, DetailActivity::class.java)
-                i.apply {
-                    putExtra("beer_name",currentItem.name)
-                    putExtra("beer_image_url",currentItem.imageUrl)
-                    putExtra("beer_tagline",currentItem.tagline)
-                    putExtra("beer_description",currentItem.description)
-                    putExtra("beer_ph",currentItem.ph)
-                }
-                it.context.startActivity(i)
+                listener.cardOnClickListener(currentItem)
             }
         }
     }
