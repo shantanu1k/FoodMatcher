@@ -2,6 +2,7 @@ package com.cowday.foodmatcher.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.cowday.foodmatcher.R
 import com.cowday.foodmatcher.databinding.ActivityDetailBinding
 import com.squareup.picasso.Picasso
@@ -32,7 +33,11 @@ class DetailActivity : AppCompatActivity() {
             }
             detailBeerName.text = beerName
             detailBeerDescription.text = beerDescription
-            detailBeerPh.text = beerPh
+            if(beerPh == ""){
+                detailPh.visibility = View.GONE
+            } else {
+                detailBeerPh.text = beerPh
+            }
             detailBeerTagline.text = beerTagLine
             // Picasso.get().load(beerImageUrl).placeholder(R.drawable.sample_image).into(detailBeerImage)
         }
