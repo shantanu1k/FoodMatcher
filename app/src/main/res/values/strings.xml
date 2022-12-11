@@ -9,4 +9,7 @@
     <string name="device_offline_text">Showing offline results</string>
     <string name="no_beer_found">No beers found :(</string>
     <string name="start_typing_text">Start typing..</string>
+    <string name="welcome_text">Press the \'Search\' button to get suggestions!</string>
+    <string name="description_text">Description:</string>
+    <string name="ph_text">pH:</string>
 </resources>
