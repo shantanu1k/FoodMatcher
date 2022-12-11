@@ -9,6 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="app_primary">#33CF97</color>
     <color name="app_secondary">#6F33CF</color>
-    <color name="card_background_color">#F5F5F5</color>
+    <color name="card_background_color">#e6e6e6</color>
     <color name="modal_color">#FFFFFF</color>
 </resources>
