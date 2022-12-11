@@ -11,7 +11,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var beerName: String
     private lateinit var beerDescription: String
-    private lateinit var beerPh: String
+    private var beerPh: Double = 0.0
     private lateinit var beerTagLine: String
     private lateinit var beerImageUrl: String
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,7 @@ class DetailActivity : AppCompatActivity() {
         intent?.extras?.apply {
             beerName = getString("beer_name") ?: ""
             beerDescription = getString("beer_description") ?: ""
-            beerPh = getString("beer_ph") ?: ""
+            beerPh = getDouble("beer_ph")
             beerTagLine = getString("beer_tagline") ?: ""
             beerImageUrl = getString("beer_image_url") ?: ""
         }
@@ -36,13 +36,9 @@ class DetailActivity : AppCompatActivity() {
             }
             detailBeerName.text = beerName
             detailBeerDescription.text = beerDescription
-            if(beerPh == ""){
-                detailPh.visibility = View.GONE
-            } else {
-                detailBeerPh.text = beerPh
-            }
+                detailBeerPh.text = beerPh.toString()
             detailBeerTagline.text = beerTagLine
-            // Picasso.get().load(beerImageUrl).placeholder(R.drawable.sample_image).into(detailBeerImage)
+            Picasso.get().load(beerImageUrl).placeholder(R.drawable.placeholder_bottle).into(detailBeerImage)
         }
     }
 }
