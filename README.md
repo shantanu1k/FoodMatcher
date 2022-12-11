@@ -1,4 +1,6 @@
-![App Banner](https://user-images.githubusercontent.com/57897297/206893252-cbf57fcb-e78f-46c7-b567-116bf4cc167b.jpg)
+
+![App Banner](https://user-images.githubusercontent.com/57897297/206899454-e872d485-237b-4ce8-964b-481fcee166f4.png)
+
 
 
 # FoodMatcher
