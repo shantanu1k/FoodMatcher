@@ -40,6 +40,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/welcome_text"
         />
+    <LinearLayout
+        android:id="@+id/no_beers_found_warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:tint="@color/no_beers_text_color"
+            android:layout_marginVertical="16dp"
+            android:src="@drawable/ic_baseline_search_off_24"
+            />
+        <TextView
+            android:id="@+id/no_beers_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/no_beers_found_text"
+            android:text="@string/no_beer_found"
+            />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/beer_recycler_view"
         android:layout_width="match_parent"
@@ -52,13 +79,13 @@
         />
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="8dp"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/custom_toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/custom_toolbar"
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/search_button"

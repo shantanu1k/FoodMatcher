@@ -45,8 +45,10 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
             binding.progressBar.isVisible = it.isEmpty()
             beerAdapter.updateBeerList(it)
             if(it.isEmpty()){
-                Toast.makeText(this, getString(R.string.no_beer_found), Toast.LENGTH_SHORT).show()
+                binding.noBeersFoundWarning.visibility = View.VISIBLE
                 binding.progressBar.isVisible = false
+            } else {
+                binding.noBeersFoundWarning.visibility = View.GONE
             }
         }
         binding.searchButton.setOnClickListener {
