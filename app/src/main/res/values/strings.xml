@@ -7,4 +7,6 @@
     <string name="sample_beer_ph">4.4</string>
     <string name="sample_beer_food_pairing">Spicy carne asada with a pico de gallo sauce, Shredded chicken tacos with a mango chilli lime salsa, Cheesecake with a passion fruit swirl sauce</string>
     <string name="device_offline_text">Showing offline results</string>
+    <string name="no_beer_found">No beers found :(</string>
+    <string name="start_typing_text">Start typing..</string>
 </resources>
