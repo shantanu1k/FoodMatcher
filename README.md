@@ -45,5 +45,5 @@ App that suggests a beer for the food of your choice <b>🍻</b>
 
 Thanks <a href="https://github.com/sammdec">@sammdec</a> for providing <a href="https://punkapi.com/documentation/v2">Punk API</a>
 
-<i>This project is a part of the <a href="https://play.google.com/store/apps/details?id=com.jumpingminds">jumpingMinds</a> exercise.</i>
+<i>This project is a part of the <a href="https://www.jumpingminds.ai/">jumpingMinds</a> exercise.</i>
 
