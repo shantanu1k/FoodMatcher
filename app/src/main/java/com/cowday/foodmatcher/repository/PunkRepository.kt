@@ -1,8 +1,6 @@
 package com.cowday.foodmatcher.repository
 
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import com.cowday.foodmatcher.data.BeerItem
 import com.cowday.foodmatcher.data.SimpleBeerItem
 import com.cowday.foodmatcher.database.BeerDatabase
@@ -15,7 +13,9 @@ import javax.inject.Inject
 
 @ActivityRetainedScoped
 class PunkRepository @Inject constructor(private val punkApi: PunkApi, beerDatabase: BeerDatabase) {
+
     private val beerDao = beerDatabase.beerDao()
+
     suspend fun getBeersForFood(foodName: String){
         val response: Response<List<BeerItem>> = try{
             punkApi.getBeersForFood(foodName)
@@ -30,12 +30,15 @@ class PunkRepository @Inject constructor(private val punkApi: PunkApi, beerDatab
             cacheBeer(response.body()!!, foodName)
         }
     }
+
+    //Caching the results in the local database
     private suspend fun cacheBeer(beerList: List<BeerItem>, foodName: String){
         for(beer in beerList){
             val simpleBear = SimpleBeerItem(beer.id, beer.imageUrl, beer.name, beer.ph, beer.tagline, beer.description, foodName)
             beerDao.addBeer(simpleBear)
         }
     }
+
     suspend fun getBeersForFoodFromDatabase(foodName: String): List<SimpleBeerItem>{
         return beerDao.getBeerForFood(foodName)
     }

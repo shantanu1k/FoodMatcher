@@ -19,6 +19,8 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.detailCustomToolbar)
+
+        //Gets the beer details
         intent?.extras?.apply {
             beerName = getString("beer_name") ?: ""
             beerDescription = getString("beer_description") ?: ""
@@ -26,6 +28,7 @@ class DetailActivity : AppCompatActivity() {
             beerTagLine = getString("beer_tagline") ?: ""
             beerImageUrl = getString("beer_image_url") ?: ""
         }
+
         binding.apply {
             supportActionBar?.title = beerName
             detailCustomToolbar.setNavigationOnClickListener {

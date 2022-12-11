@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
     private lateinit var beerAdapter: BeerAdapter
     private var isSearchOpen = false
     private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,10 +38,12 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
         binding.welcomeText.visibility = View.VISIBLE
         recyclerView = binding.beerRecyclerView
         beerAdapter = BeerAdapter(this)
+
         recyclerView.apply {
             adapter = beerAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
+
         viewModel.beers.observe(this) {
             binding.progressBar.isVisible = it.isEmpty()
             beerAdapter.updateBeerList(it)
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
                 binding.noBeersFoundWarning.visibility = View.GONE
             }
         }
+
         binding.searchButton.setOnClickListener {
             isSearchOpen = !isSearchOpen
             if(isSearchOpen){
@@ -80,6 +84,7 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
             }
         }
     }
+
     fun exitSearchButton(){
         binding.beerRecyclerView.visibility = View.VISIBLE
         binding.apply {
@@ -88,6 +93,8 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
             customToolbar.visibility = View.VISIBLE
         }
     }
+
+    //Gets the results from the local database
     @SuppressLint("SetTextI18n")
     fun getBeersForFood(foodName: String){
         lifecycleScope.launch {
@@ -112,6 +119,7 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
             }
         }
     }
+
     override fun onStart() {
         super.onStart()
         //For configuration changes
@@ -124,6 +132,8 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
             }
         }
     }
+
+    //Checks for internet connectivity
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
@@ -131,6 +141,7 @@ class MainActivity : AppCompatActivity(), BeerAdapter.OnClickListener {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
+    //handles the clicks on the beer cards
     override fun cardOnClickListener(beerItem: SimpleBeerItem) {
         val i = Intent(this, DetailActivity::class.java)
         i.apply {

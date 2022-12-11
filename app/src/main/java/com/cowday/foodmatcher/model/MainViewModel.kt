@@ -16,12 +16,16 @@ class MainViewModel @Inject constructor(private val repository: PunkRepository):
     private var _beers: MutableLiveData<List<SimpleBeerItem>> = MutableLiveData()
     val beers: LiveData<List<SimpleBeerItem>>
         get() = _beers
+
     suspend fun getBeersForFood(foodName: String){
         repository.getBeersForFood(foodName)
     }
+
     suspend fun getBeersForFoodFromDatabase(foodName: String){
         _beers.value = repository.getBeersForFoodFromDatabase(foodName)
     }
+
+    //Normalizing the food names for searching purpose
     fun normalizeText(foodName: String): String{
         var normalizedName = ""
         for(i in foodName){
