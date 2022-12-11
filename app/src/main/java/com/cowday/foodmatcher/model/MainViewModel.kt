@@ -28,7 +28,7 @@ class MainViewModel @Inject constructor(private val repository: PunkRepository):
             normalizedName += if(i == ' '){
                 '_'
             } else {
-                i
+                i.lowercase()
             }
         }
         return normalizedName
