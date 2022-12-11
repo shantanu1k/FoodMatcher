@@ -30,13 +30,13 @@ App that suggests a beer for the food of your choice <b>🍻</b>
   <img src="https://user-images.githubusercontent.com/57897297/206894507-3186c9f5-45f9-46ba-acd6-ee869694dca9.png" width="170" height="350"/> &nbsp
   &nbsp<img src="https://user-images.githubusercontent.com/57897297/206894499-10a7673f-ce36-41f9-8b23-9a8585f8317e.png" width="170" height="350"/> &nbsp
   &nbsp<img src="https://user-images.githubusercontent.com/57897297/206894501-45873dae-ab11-48b1-aabc-fc7bcb1e2f0f.png" width="170" height="350"/> &nbsp
-  &nbsp<img src="https://user-images.githubusercontent.com/57897297/206894502-4293392a-6274-4ef5-90b2-aee868058aca.png" width="170" height="350"/>
+  &nbsp<img src="https://user-images.githubusercontent.com/57897297/206901491-5299b415-0b29-46d4-8dd7-1fb42126b21e.png" width="170" height="350"/>
 </span>
 </br></br></br>
 <span>
-  <img src="https://user-images.githubusercontent.com/57897297/206894482-bbca088d-4d9a-43a8-8e70-0da0807d2099.png" width="170" height="350"/>&nbsp
-  &nbsp<img src="https://user-images.githubusercontent.com/57897297/206894703-aeeaf875-13ae-4821-adfa-7ed509e3a5b4.png" width="170" height="350"/>&nbsp
-  &nbsp<img src="https://user-images.githubusercontent.com/57897297/206894493-92df6f08-7216-4739-b443-a9e5c4f21211.png" width="170" height="350"/>
+  <img src="https://user-images.githubusercontent.com/57897297/206901495-43e590c8-bdfd-48e2-b928-979ed6e494da.png" width="170" height="350"/>&nbsp
+  &nbsp<img src="https://user-images.githubusercontent.com/57897297/206901500-9e1b8021-47b5-47f0-853f-a46087b3012f.png" width="170" height="350"/>&nbsp
+  &nbsp<img src="https://user-images.githubusercontent.com/57897297/206901507-5659bae9-edb4-4073-b8b9-e8b50bfafd9f.png" width="170" height="350"/>
 </span>
 </br></br></br>
 
