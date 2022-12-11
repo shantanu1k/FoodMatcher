@@ -22,4 +22,15 @@ class MainViewModel @Inject constructor(private val repository: PunkRepository):
     suspend fun getBeersForFoodFromDatabase(foodName: String){
         _beers.value = repository.getBeersForFoodFromDatabase(foodName)
     }
+    fun normalizeText(foodName: String): String{
+        var normalizedName = ""
+        for(i in foodName){
+            normalizedName += if(i == ' '){
+                '_'
+            } else {
+                i
+            }
+        }
+        return normalizedName
+    }
 }
