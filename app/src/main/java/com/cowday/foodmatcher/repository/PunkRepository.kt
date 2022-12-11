@@ -10,7 +10,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
-
+const val BASE_URL = "https://images.punkapi.com/v2/"
 @ActivityRetainedScoped
 class PunkRepository @Inject constructor(private val punkApi: PunkApi, beerDatabase: BeerDatabase) {
 
@@ -34,12 +34,15 @@ class PunkRepository @Inject constructor(private val punkApi: PunkApi, beerDatab
     //Caching the results in the local database
     private suspend fun cacheBeer(beerList: List<BeerItem>, foodName: String){
         for(beer in beerList){
-            val simpleBear = SimpleBeerItem(beer.id, beer.imageUrl, beer.name, beer.ph, beer.tagline, beer.description, foodName)
+            val simpleBear = SimpleBeerItem(beer.id, getImageUrl(beer.id ?: 192), beer.name, beer.ph, beer.tagline, beer.description, foodName)
             beerDao.addBeer(simpleBear)
         }
     }
 
     suspend fun getBeersForFoodFromDatabase(foodName: String): List<SimpleBeerItem>{
         return beerDao.getBeerForFood(foodName)
+    }
+    private fun getImageUrl(id: Int): String {
+        return "$BASE_URL${id}.png"
     }
 }
