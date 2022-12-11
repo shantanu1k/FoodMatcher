@@ -5,75 +5,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.DetailActivity">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/detail_custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#4CAF50"
+            android:background="@color/app_primary"
             app:elevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_round_arrow_back_24"
             app:titleCentered="true" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/beer_image_card"
             android:layout_width="match_parent"
             android:layout_height="360dp"
+            app:cardCornerRadius="8dp"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_custom_toolbar"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/detail_custom_toolbar">
+
             <ImageView
                 android:id="@+id/detail_beer_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="16dp"
-                android:src="@drawable/sample_image"
-                />
+                android:src="@drawable/sample_image" />
         </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/detail_beer_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginVertical="8dp"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline_end"
+            style="@style/detail_beer_name"
+            app:layout_constraintStart_toStartOf="@id/vertical_guideline_start"
             app:layout_constraintTop_toBottomOf="@id/beer_image_card"
-            app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/sample_beer_name" />
+
         <TextView
             android:id="@+id/detail_beer_tagline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline_end"
+            style="@style/detail_beer_tagline"
+            android:layout_marginVertical="8dp"
+            app:layout_constraintStart_toStartOf="@id/vertical_guideline_start"
             app:layout_constraintTop_toBottomOf="@id/detail_beer_name"
+            app:layout_constraintBottom_toTopOf="@id/detail_description"
             tools:text="@string/sample_beer_tagline" />
-        <TextView
-            android:id="@+id/detail_beer_description"
+
+        <LinearLayout
+            android:id="@+id/detail_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/vertical_guideline_start"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline_end"
+            android:orientation="vertical"
+            android:layout_marginVertical="8dp"
             app:layout_constraintTop_toBottomOf="@id/detail_beer_tagline"
-            tools:text="@string/sample_beer_description" />
-        <TextView
-            android:id="@+id/detail_beer_ph"
+            app:layout_constraintBottom_toTopOf="@id/detail_ph">
+            <TextView
+                android:id="@+id/detail_description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/detail_description_text"
+                android:text="Description: "
+                />
+            <TextView
+                android:id="@+id/detail_beer_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:breakStrategy="high_quality"
+                style="@style/detail_beer_description"
+                tools:text="@string/sample_beer_description" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/detail_ph"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_beer_description"
-            tools:text="@string/sample_beer_ph" />
-        <TextView
-            android:id="@+id/detail_beer_food_pairing"
-            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="@id/vertical_guideline_start"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline_end"
+            android:layout_marginVertical="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/detail_description">
+            <TextView
+                android:id="@+id/detail_ph_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/detail_beer_name"
+                android:text="pH: "
+                />
+
+            <TextView
+                android:id="@+id/detail_beer_ph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/detail_beer_ph"
+                tools:text="@string/sample_beer_ph" />
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guideline_start"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_beer_ph"
-            tools:text="@string/sample_beer_food_pairing" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.02" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.98" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
