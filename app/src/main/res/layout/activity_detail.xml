@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/detail_description_text"
-                android:text="Description: "
+                android:text="@string/description_text"
                 />
             <TextView
                 android:id="@+id/detail_beer_description"
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/detail_beer_name"
-                android:text="pH: "
+                android:text="@string/ph_text"
                 />
 
             <TextView
