@@ -20,7 +20,6 @@ App that suggests a beer for the food of your choice <b>🍻</b>
 <h3>Insights</h3>
 
 * Kotlin
-* Offline-first
 * MVVM architecture
 * Dependency Injection - Hilt
 * Retrofit and caching with Room database
